@@ -1,0 +1,10 @@
+{
+  "solution": {
+    "name": "term-set-requester-client-side-solution",
+    "id": "e287ddb7-f622-40a6-a02e-afe6b52f7a1c",
+    "version": "1.0.0.0"
+  },
+  "paths": {
+    "zippedPackage": "solution/term-set-requester.sppkg"
+  }
+}
