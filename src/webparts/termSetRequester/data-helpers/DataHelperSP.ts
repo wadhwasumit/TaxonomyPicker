@@ -2,6 +2,7 @@
 import {
   IWebPartContext
 } from '@microsoft/sp-webpart-base';
+
 import {
   ITermStore,
   ITermSet,
@@ -667,4 +668,231 @@ export class DataHelperSP implements IDataHelper {
 
     return termEntities;
   }
+private S4() {
+    return (((1+Math.random())*0x10000)|0).toString(16).substring(1); 
+}
+private guid()
+{
+  var newGuid = (this.S4() + this.S4() + "-" + this.S4() + "-4" + this.S4().substr(0,3) + "-" +this. S4() + "-" + this.S4() +this. S4() + this.S4()).toLowerCase();
+ return newGuid.toString();
+} 
+// then to call it, plus stitch in '4' in the third group
+
+  public addGroup(termStoreId:string) {
+ 
+var groupName = "My New Group";
+ 
+var newGuid = this.guid();
+ 
+ 
+this.getTermStoreById(termStoreId).then((termStore) => { // getting term store by id
+        if (!termStore) {
+          //resolve([]);
+          return;
+        }
+ 
+var newGroup = termStore.createGroup(groupName, newGuid.toString());
+ 
+ this.clientContext.load(newGroup);
+ 
+ this.clientContext.executeQueryAsync(function () {
+ 
+//success
+ 
+},
+ 
+function () {
+ 
+//failed
+ 
+});
+ });
+}
+public addTerm(termStoreId:string, termSetId:string) {
+ 
+var termName = "My New Term";
+ 
+var newGuid = this.guid();
+ 
+ 
+this.getTermStoreById(termStoreId).then((termStore) => { // getting term store by id
+        if (!termStore) {
+          //resolve([]);
+          return;
+        }
+ 
+var termSet = termStore.getTermSet(termSetId);
+ 
+var newTerm = termSet.createTerm(termName, newGuid.toString(), 1033);
+ 
+ 
+this.clientContext.load(newTerm);
+ 
+this.clientContext.executeQueryAsync(function () {
+ 
+//Success
+ 
+},
+ 
+function () {
+ 
+//failed
+ 
+});
+});
+ 
+}
+public addTermSet(termStoreId : string, groupId : string) {
+ 
+var termSetName = "test";
+ 
+var newGuid = this.guid();
+ 
+ 
+this.getTermStoreById(termStoreId).then((termStore) => { // getting term store by id
+        if (!termStore) {
+          //resolve([]);
+          return;
+        }
+console.log(termStore.get_name());
+        this.getTermGroupById(termStore, groupId).then((group) => { // getting term group by id
+          if (!group) {
+           // resolve([]);
+            return;
+          }
+          console.log(group.get_name());
+          var newTermSet = group.createTermSet(termSetName, newGuid.toString(), 1033);
+ 
+ 
+this.clientContext.load(newTermSet);
+ 
+this.clientContext.executeQueryAsync((result) => {
+        console.log('result');  console.log(result);
+        }, (error) => {
+        console.log('error');  console.log(error); console.log(newTermSet);
+        });
+ 
+        });
+  });
+
+}
+public addSubTerm(termStoreId :string, termSetId:string, parentTermId:string) {
+ 
+var termName = "My Child Term";
+ 
+var newGuid = this.guid();
+ 
+ 
+this.getTermStoreById(termStoreId).then((termStore) => { // getting term store by id
+        if (!termStore) {
+          //resolve([]);
+          return;
+        }
+
+ 
+var termSet = termStore.getTermSet(termSetId);
+ 
+var parentTerm = termSet.getTerm(parentTermId);
+ 
+ 
+var newTerm = parentTerm.createTerm(termName, newGuid.toString(), 1033);
+ 
+ 
+this.clientContext.load(newTerm);
+ 
+this.clientContext.executeQueryAsync(function () {
+ 
+//Success
+ 
+},
+ 
+function () {
+ 
+//failed
+ 
+});
+});
+ 
+}
+public removeGroup(termStoreId:string, groupId:string) {
+ 
+this.getTermStoreById(termStoreId).then((termStore) => { // getting term store by id
+        if (!termStore) {
+          //resolve([]);
+          return;
+        }
+ 
+var group = termStore.getGroup(groupId);
+ 
+group.deleteObject();
+ 
+this.clientContext.executeQueryAsync(function () {
+ 
+//success
+ 
+},
+ 
+function () {
+ 
+//failed.
+ 
+});
+});
+ 
+}
+public removeTermSet(termStoreId :string, groupId :string, termSetId:string) {
+ 
+this.getTermStoreById(termStoreId).then((termStore) => { // getting term store by id
+        if (!termStore) {
+          //resolve([]);
+          return;
+        }
+var termSet = termStore.getTermSet(termSetId);
+ 
+ 
+termSet.deleteObject();
+ 
+this.clientContext.executeQueryAsync(function () {
+ 
+//success
+ 
+},
+ 
+function () {
+ 
+//failed
+ 
+});
+ });
+}
+public removeTerm(termStoreId:string, termSetId:string, termId:string) {
+ 
+this.getTermStoreById(termStoreId).then((termStore) => { // getting term store by id
+        if (!termStore) {
+          //resolve([]);
+          return;
+        }
+ 
+var termSet = termStore.getTermSet(termSetId);
+ 
+var term = termSet.getTerm(termId);
+ 
+ 
+term.deleteObject();
+ 
+this.clientContext.executeQueryAsync(function () {
+ 
+//success
+ 
+},
+ 
+function () {
+ 
+//failed.
+ 
+});
+});
+ 
+}
+
 }

@@ -2,6 +2,8 @@
  * SP namespace
  */
 declare namespace SP {
+
+  
   /**
    * Client Context class
    */
@@ -80,6 +82,8 @@ declare namespace SP {
        * API to get term set by its id
        */
       getTermSet(id: string): ITermSet;
+
+      createGroup(groupName:string,guid: string);
     }
 
     /**
@@ -104,6 +108,10 @@ declare namespace SP {
        * API to get term sets from the group
        */
       get_termSets(): ITermSetCollection;
+
+      createTermSet(termName:string, guid:string, lanid:number);
+
+      deleteObject();
     }
 
     /**
@@ -128,6 +136,12 @@ declare namespace SP {
        * API to get flat list of all terms in the Term set
        */
       getAllTerms(): ITermCollection;
+
+      createTerm(termName:string, guid:string, lanid:number);
+
+      getTerm(parentTermId):ITerm;
+
+      deleteObject();
     }
 
     /**
@@ -164,6 +178,9 @@ declare namespace SP {
        * API to get path of the term in defauld lcid
        */
       get_pathOfTerm(): string;
+
+       createTerm(termName:string, guid:string, lanid:number);
+       deleteObject();
     }
 
     /**

@@ -46,6 +46,9 @@ export class TaxonomyControlView {
         <button class="ms-GroupHeader-expand ${styles.groupHeaderExpand}">
           <i class="ms-Icon ms-Icon--ChevronDown" data-bind="click: actionClick, css: { 'is-collapsed': !isExpanded() }"></i>
         </button>
+        <button >
+          <i class="ms-Icon ms-Icon--ChevronDown" data-bind="click: actionClick1, css: { 'is-collapsed': !isExpanded() }"></i>
+        </button>
       </div>
       <ul data-bind="visible: isExpanded" class="${styles.termList}">
         <!-- ko template: { name: 'termTpl', foreach: terms } -->

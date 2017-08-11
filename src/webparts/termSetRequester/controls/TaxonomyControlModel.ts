@@ -63,4 +63,27 @@ export class TaxonomyControlModel {
   public getChildTerms(term: ITerm): Promise<ITerm[]> {
     return this._dataHelper.getChildTerms(term);
   }
+   public addTermSet(termStoreId : string, groupId : string)  {
+    return this._dataHelper.addTermSet(termStoreId,groupId);
+  }
+
+  public addGroup(termStoreId:string){
+    return this._dataHelper.addGroup(termStoreId);
+  }
+
+ public  addTerm(termStoreId:string, termSetId:string) {
+    return this._dataHelper.addTerm(termStoreId,termSetId);
+  }
+   public addSubTerm(termStoreId :string, termSetId:string, parentTermId:string){
+    return this._dataHelper.addSubTerm(termStoreId,termSetId,parentTermId);
+  }
+  public   removeGroup(termStoreId:string, groupId:string){
+    return this._dataHelper.removeGroup(termStoreId,groupId);
+  }
+   public  removeTermSet(termStoreId :string, groupId :string, termSetId:string){
+    return this._dataHelper.removeTermSet(termStoreId,groupId,termSetId);
+  }
+   public  removeTerm(termStoreId:string, termSetId:string, termId:string){
+    return this._dataHelper.removeTerm(termStoreId,termSetId,termId);
+  }
 }

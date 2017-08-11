@@ -15,7 +15,7 @@ import {
 /**
  * Taxonomy Control ViewModel class
  */
-export class TaxonomyControlViewModel {
+export class TaxonomyControlViewModel1 {
   /**
    * Collection of term store view models
    */

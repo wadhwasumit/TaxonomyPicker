@@ -8,6 +8,15 @@
   "manifestVersion": 2,
 
   "preconfiguredEntries": [{
+    "groupId": "82e4b7b1-602f-4b4f-8a35-cb0e44b2de83",
+    "group": { "default": "Under Development" },
+    "title": { "default": "TermSetReq" },
+    "description": { "default": "Requests a Term Set" },
+    "officeFabricIconFontName": "Page",
+    "properties": {
+      "description": "TermSetReq"
+    }},
+    {
     "groupId": "82e4b7b1-602f-4b4f-8a35-cb0e44b2de82",
     "group": { "default": "Under Development" },
     "title": { "default": "TermSetRequester" },
@@ -16,5 +25,7 @@
     "properties": {
       "description": "TermSetRequester"
     }
-  }]
+  }
+  
+  ]
 }

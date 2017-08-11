@@ -7,7 +7,7 @@ import {
 import {
   IDataHelper
 } from './DataHelperBase';
-
+import { Guid } from 'guid';
 /**
  * Interface for Term store with groups
  */
@@ -150,6 +150,7 @@ export class DataHelperMock implements IDataHelper {
         const termStore = DataHelperMock._termStores[i];
         if (termStore.id === termStoreId) {
           resolve(termStore.groups);
+           console.log(termStore.groups);
           return;
         }
       }
@@ -161,6 +162,7 @@ export class DataHelperMock implements IDataHelper {
   public getTermSets(termGroup: ITermGroup): Promise<ITermSet[]> {
     return new Promise<ITermSet[]>((resolve) => {
       const termGroupWithTermSets: ITermGroupWithTermSets = termGroup as ITermGroupWithTermSets;
+      console.log(termGroupWithTermSets.termSets);
       resolve(termGroupWithTermSets.termSets);
     });
   }
@@ -170,6 +172,7 @@ export class DataHelperMock implements IDataHelper {
   public getTerms(termSet: ITermSet): Promise<ITerm[]> {
     return new Promise<ITerm[]>((resolve) => {
       const termSetWithTerms: ITermSetWithTerms = termSet as ITermSetWithTerms;
+       
       resolve(termSetWithTerms.terms);
     });
   }
@@ -182,4 +185,44 @@ export class DataHelperMock implements IDataHelper {
       resolve(termWithTerms.terms);
     });
   }
+
+  public addTermSet(termStoreId : string, groupId : string) {
+ 
+var termSetName = "test";
+ 
+//var newGuid = Guid.create();
+for (let i = 0, len = DataHelperMock._termStores.length; i < len; i++) {
+        const termStore = DataHelperMock._termStores[i];
+        if (termStore.id === termStoreId) {
+         // resolve(termStore.groups);
+         
+         DataHelperMock._termStores[i].groups[0].termSets.push({
+        id: this.guid(),
+        termGroupId: '96BD2791-BD83-4E1F-930C-0F2EBE943DFA',
+        termStoreId: 'BBB5D5CF-F39E-45D4-A71A-F74681133D03',
+        name: 'TSet 1 Gr 1 TStore New Term By Sumit',
+        description: 'Term Set 1 from Group 1 from New Term By Sumit',
+        terms: []
+    });
+    console.log(DataHelperMock._termStores);
+   this.getTermSets(DataHelperMock._termStores[i].groups[0]);
+          return;
+        }
+      }
+  }
+addGroup(termStoreId:string){}
+
+   addTerm(termStoreId:string, termSetId:string) {}
+    addSubTerm(termStoreId :string, termSetId:string, parentTermId:string){}
+     removeGroup(termStoreId:string, groupId:string){}
+     removeTermSet(termStoreId :string, groupId :string, termSetId:string){}
+   removeTerm(termStoreId:string, termSetId:string, termId:string) {}
+   private S4() {
+    return (((1+Math.random())*0x10000)|0).toString(16).substring(1); 
+}
+private guid()
+{
+  var newGuid = (this.S4() + this.S4() + "-" + this.S4() + "-4" + this.S4().substr(0,3) + "-" +this. S4() + "-" + this.S4() +this. S4() + this.S4()).toLowerCase();
+ return newGuid.toString();
+} 
 }

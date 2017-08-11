@@ -29,4 +29,14 @@ export interface IDataHelper {
    * API to get Terms by Term
    */
   getChildTerms(term: ITerm): Promise<ITerm[]>;
+
+   addTermSet(termStoreId : string, groupId : string);
+
+   addGroup(termStoreId:string);
+
+   addTerm(termStoreId:string, termSetId:string) ;
+    addSubTerm(termStoreId :string, termSetId:string, parentTermId:string);
+     removeGroup(termStoreId:string, groupId:string);
+     removeTermSet(termStoreId :string, groupId :string, termSetId:string);
+     removeTerm(termStoreId:string, termSetId:string, termId:string);
 }
